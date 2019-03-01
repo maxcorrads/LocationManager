@@ -55,7 +55,9 @@ public class DispatcherLocationProvider extends LocationProvider implements Cont
             activeProvider.onDestroy();
         }
 
-        getSourceProvider().gpServicesSwitchTask().stop();
+        if (getSourceProvider() != null && getSourceProvider().gpServicesSwitchTask() != null) {
+            getSourceProvider().gpServicesSwitchTask().stop();
+        }
 
         dispatcherLocationSource = null;
         gpServicesDialog = null;
@@ -66,8 +68,10 @@ public class DispatcherLocationProvider extends LocationProvider implements Cont
         if (activeProvider != null) {
             activeProvider.cancel();
         }
+        if (getSourceProvider() != null && getSourceProvider().gpServicesSwitchTask() != null) {
+            getSourceProvider().gpServicesSwitchTask().stop();
+        }
 
-        getSourceProvider().gpServicesSwitchTask().stop();
     }
 
     @Override
